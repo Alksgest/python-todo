@@ -41,5 +41,7 @@ class HomeView(FormView):
         # data = { 
         #     "data" : TodoModel.objects.all()
         # }
+       # data = TodoModel.objects.order_by('date')
         data = TodoModel.objects.all()
+        
         return render(request, self.template_name, {"data" : data})
