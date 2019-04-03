@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1 class="mt-5">Greetings!</h1>
-
+    <h1 class="mt-5">Todos: </h1>
+    <ul>
+        {% for todo_item in data %}
+        <li>{{ todo_item.date|date:"Y.m.d" }} {{ todo_item.content }}</li>
+        {% endfor %}
+    </ul>
 {% endblock content %}

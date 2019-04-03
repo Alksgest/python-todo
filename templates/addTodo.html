@@ -5,7 +5,15 @@
         {% csrf_token %}
         <h1 class="mt-5">Add new Todo</h1>
         <p class="lead">
-            <table> {{ form }} </table>
+            <p>
+                <label>Input date: </label>
+                <input type="date" name="date">
+            </p>
+            <p>
+                <label>Input content: </label>
+                <input type="text" name="content">
+            </p>
+            <!-- <table> {{ form }} </table> -->
             <input type="submit" value="Send">
         </p>
     </form>
