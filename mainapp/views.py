@@ -3,7 +3,8 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, FormView
 from django.http import HttpResponse
 from .forms import TodoInputForm
-
+from .models import TodoModel
+from django.db import models
 
 class AddTodoView(FormView):
     template_name = "addTodo.html"
@@ -24,4 +25,5 @@ class HomeView(FormView):
     template_name = "index.html"
 
     def get(self, request):
-        return render(request, self.template_name)
+        data = TodoModel.fiel.all()
+        return render(request, self.template_name, context=data)
