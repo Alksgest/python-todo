@@ -6,12 +6,14 @@
             <th>Id</th>
             <th>Date</th>
             <th>Content</th>
+            <th>Owner</th>
         </tr>
         {% for todo_item in data %}
         <tr>
             <td>{{ todo_item.id }}</td>
             <td>{{ todo_item.date|date:"Y.m.d" }}</td>
             <td>{{ todo_item.content }}</td>
+            <td>{{ todo_item.owner }}</td>
         </tr>
         {% endfor %}
     </table>

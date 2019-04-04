@@ -2,9 +2,13 @@ from django.db import models
 from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import render
 from django.views.generic import FormView, TemplateView
+from rest_framework import generics
+from django.contrib.auth.models import User
+from rest_framework import generics, permissions
 
 from .forms import TodoInputForm
 from .models import TodoModel
+from .serializers import TodoSerializer, UserSerializer
 
 
 class AddTodoView(FormView):
@@ -45,3 +49,29 @@ class HomeView(FormView):
         data = TodoModel.objects.all()
         
         return render(request, self.template_name, {"data" : data})
+
+
+class TodoList(generics.ListCreateAPIView):
+    queryset = TodoModel.objects.all()
+    serializer_class = TodoSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class TodoDetails(generics.RetrieveUpdateDestroyAPIView):
+    queryset = TodoModel.objects.all()
+    serializer_class = TodoSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = TodoSerializer
+
+
+class UserDetails(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
