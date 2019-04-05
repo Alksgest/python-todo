@@ -22,13 +22,6 @@ def api_root(request, format=None):
         'todos': reverse('todo-list', request=request, format=format)
     })
 
-class RedirectView(FormView):
-    def get(self, request, *args, **kwargs):
-        id = kwargs['id']
-        url = "/todos/{0}".format(id)
-        return HttpResponsePermanentRedirect(url)
-
-
 class AddTodoView(FormView):
     template_name = "addTodo.html"
     form_class = TodoInputForm
@@ -51,6 +44,7 @@ class AddTodoView(FormView):
             return HttpResponsePermanentRedirect("/")
         
         return HttpResponse("not success.(")
+    
 
 
 class HomeView(FormView):
@@ -64,10 +58,11 @@ class HomeView(FormView):
         # data = { 
         #     "data" : TodoModel.objects.all()
         # }
-       # data = TodoModel.objects.order_by('date')
-        data = TodoModel.objects.all()
+        #data = TodoModel.objects.order_by('date')
+        #data = TodoModel.objects.all()
         
-        return render(request, self.template_name, {"data" : data})
+        return render(request, self.template_name)
+
 
 class TodoDetailsView(FormView):
     template_name = "todoDetails.html"
@@ -82,6 +77,13 @@ class TodoDetailsView(FormView):
 
         return render(request, self.template_name, {"data": data})
 
+
+class TodoListView(FormView):
+    template_name = "todoList.html"
+
+    def get(self, request, *args, **kwargs):
+        data = TodoModel.objects.all()
+        return render(request, self.template_name, {'data': data})
 
 class TodoList(generics.ListCreateAPIView):
     queryset = TodoModel.objects.all()

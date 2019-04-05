@@ -16,13 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from mainapp.views import AddTodoView, HomeView, TodoDetailsView, RedirectView
+from mainapp.views import AddTodoView, HomeView, TodoDetailsView, TodoListView
 
 urlpatterns = [
     path('', HomeView.as_view()),
-    path('<int:id>/', RedirectView.as_view()),
-    path('todos/', HomeView.as_view()),
-    path('todos/<int:id>/', TodoDetailsView.as_view()),
+    path('todos/', TodoListView.as_view()),
+    path('todos/<int:id>/', TodoDetailsView.as_view(), name='todos'),
     path('addTodo/', AddTodoView.as_view()),
     path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
