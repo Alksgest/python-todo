@@ -25,7 +25,8 @@ def api_root(request, format=None):
 class RedirectView(FormView):
     def get(self, request, *args, **kwargs):
         id = kwargs['id']
-        return HttpResponsePermanentRedirect("/todos/{0}".format(id))
+        url = "/todos/{0}".format(id)
+        return HttpResponsePermanentRedirect(url)
 
 
 class AddTodoView(FormView):
