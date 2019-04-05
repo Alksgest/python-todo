@@ -4,15 +4,17 @@
     <table class="table">
         <tr>
             <th>Id</th>
+            <th>Title</th>
             <th>Date</th>
-            <th>Content</th>
+            <!-- <th>Content</th> -->
             <th>Owner</th>
         </tr>
         {% for todo_item in data %}
         <tr>
-            <td>{{ todo_item.id }}</td>
+            <td><a href="{{ todo_item.id }}">{{ todo_item.id }}</a></td>
+            <td>{{ todo_item.title }}</td>
             <td>{{ todo_item.date|date:"Y.m.d" }}</td>
-            <td>{{ todo_item.content }}</td>
+            <!--<td>{{ todo_item.content }}</td>-->
             <td>{{ todo_item.owner }}</td>
         </tr>
         {% endfor %}

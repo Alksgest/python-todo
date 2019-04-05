@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 class="mt-5">Todos: </h1>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Content</th>
+            <th>Owner</th>
+        </tr>
+        <tr>
+            <td>{{ data.id }}</td>
+            <td>{{ data.title }}</td>
+            <td>{{ data.date|date:"Y.m.d" }}</td>
+            <td>{{ data.content }}</td>
+            <td>{{ data.owner }}</td>
+        </tr>
+    </table>
+
+{% endblock content %}
