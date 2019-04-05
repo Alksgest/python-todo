@@ -1,24 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        <h1 class="mt-5">Add new Todo</h1>
-        <p class="lead">
-            <p>
-                <label>Input title: </label>
-                <input type="text" name="title">
+<div class="container">
+    <form method="POST" class="was-validated">
+        <div class="from-group">
+            {% csrf_token %}
+            <h1 class="mt-5">Add new Todo</h1>
+            <p class="lead">
+                <p>
+                    <label>Input title: </label>
+                    <input type="text" name="title" class="form-control" required> 
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </p>
+                <p>
+                    <label>Input date: </label>
+                    <input type="date" name="date" class="form-control" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </p>
+                <p>
+                    <label>Input content: </label>
+                    <textarea name="content" rows="6" class="form-control" required></textarea>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </p>
+                <!-- <table> {{ form }} </table> -->
+                <input type="submit" value="Send" class="btn btn-secondary">
             </p>
-            <p>
-                <label>Input date: </label>
-                <input type="date" name="date">
-            </p>
-            <p>
-                <label>Input content: </label>
-                <textarea name="content" rows="6"></textarea>
-            </p>
-            <!-- <table> {{ form }} </table> -->
-            <input type="submit" value="Send">
-        </p>
-    </form>
+        </form>
+    </div>
+</div>
 {% endblock content %}

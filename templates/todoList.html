@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
     <h1 class="mt-5">Todos: </h1>
-    <table class="table">
-        <tr>
+    <table class="table table-bordered">
+        <tr class="thead-light">
             <th>Id</th>
             <th>Title</th>
             <th>Date</th>
@@ -11,12 +11,9 @@
         </tr>
         {% for todo_item in data %}
         <tr>
-            <!-- <td><a href="{{ todo_item.id }}">{{ todo_item.id }}</a></td> -->
-            <!-- <td><a href="/{{ todo_item.id }}/">{{ todo_item.id }}</a></td> -->
             <td><a href="{% url 'todos' id=todo_item.id %}">{{ todo_item.id }}</a></td>
             <td>{{ todo_item.title }}</td>
             <td>{{ todo_item.date|date:"Y.m.d" }}</td>
-            <!--<td>{{ todo_item.content }}</td>-->
             <td>{{ todo_item.owner }}</td>
         </tr>
         {% endfor %}

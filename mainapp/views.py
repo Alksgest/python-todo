@@ -37,6 +37,7 @@ class AddTodoView(FormView):
             item.title = request.POST.get("title")
             item.date = request.POST.get("date")
             item.content = request.POST.get("content")
+            item.owner = self.request.user
             item.save()
             # d = request.POST.get("date")
             # c = request.POST.get("content")
