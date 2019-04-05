@@ -1,19 +1,19 @@
+from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.http import HttpResponse, HttpResponsePermanentRedirect
 from django.shortcuts import render
 from django.views.generic import FormView, TemplateView
-from rest_framework import generics
-from django.contrib.auth.models import User
 from rest_framework import generics, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
-from django.core.exceptions import ObjectDoesNotExist
 
 from .forms import TodoInputForm
 from .models import TodoModel
-from .serializers import TodoSerializer, UserSerializer
 from .permissions import IsOwnerOrReadOnly
+from .serializers import TodoSerializer, UserSerializer
+
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -85,6 +85,7 @@ class TodoListView(FormView):
     def get(self, request, *args, **kwargs):
         data = TodoModel.objects.all()
         return render(request, self.template_name, {'data': data})
+        
 
 class TodoList(generics.ListCreateAPIView):
     queryset = TodoModel.objects.all()
@@ -109,4 +110,3 @@ class UserList(generics.ListAPIView):
 class UserDetails(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-
